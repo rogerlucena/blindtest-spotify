@@ -11,7 +11,7 @@ import Button from './Button';
 
 
 // You have to get a new token every 1 hour !!!
-const apiToken = 'BQC78EMhx0XyLxKtiy6zlY--TamMWlp_NRu-QqjCcBAsUK5d8t888Q4v6GXfqBPIBvscislVgRJVO0VdUDswHs7UMTxg23O98Ut_MwVtBR0dCMBZ7m51qkd1ebosgdSWymuHkrx3jBPxEyGx6pVUitH0OgGrHUp7LJS9a0DxfMg';
+const apiToken = 'BQCzhJ5EVAjHzQkPnE-ooYrnd2BPFV0ltebfD0L6vaUAvkYOYRIJYl7bDHe9e8wDe2H1mSGZ4csjOeNqGqi-F_B0s3M1-zEOQMDAQfYZ7AFcHMSi8Xw6OdnHJlGMcUxOCr4MOcr14xLW3lGOjQuhbtsA3F7xY-mlpABkpIA72AU';
 
 function shuffleArray(array) {
   let counter = array.length;
@@ -50,15 +50,30 @@ class App extends Component {
     this.state = {
     	text: "" ,
     	songsLoaded: false,
-    	firstTrackName: "",
-    	tracks: {}
+    	tracks: {},
+    	currentTrack: null
     }
   }
 
   render() {
   	if(this.state.songsLoaded){
   		console.log(this.state.tracks);
+
+  	  	const randomIndex1 = getRandomNumber(this.state.tracks.length);
+      	const randomIndex2 = getRandomNumber(this.state.tracks.length);
+
+	    const track0 = this.state.currentTrack;
+	    const track1 = this.state.tracks[randomIndex1];
+	    const track2 = this.state.tracks[randomIndex2];
+
+	    const tracks = [track0, track1, track2];
+	    const shuffledTracks = shuffleArray(tracks);
+
 		// <!--To be printing the javascript variable1 you use {}-->
+		
+		// Lines that were below "Sound"
+		// <div>{this.state.text} </div>
+		// <div>{this.state.tracks[0].track.name}</div>
 	    return (
 	      <div className="App">
 	        <header className="App-header">
@@ -66,20 +81,23 @@ class App extends Component {
 	          <h1 className="App-title">Welcome to the Blindtest</h1>
 	        </header>
 	        <div className="App-images">
-	        	<AlbumCover track = {this.state.tracks[0].track}/>
-	        	<Sound url={this.state.tracks[0].track.preview_url} playStatus={Sound.status.PLAYING}/>
-		        <div>{this.state.text} </div>
-		        <div>{this.state.tracks[0].track.name}</div>
-		        <p>Here we go with the Web Dojo !</p>
-		        <Button>{this.state.tracks[0].track.name}</Button>
-		        <Button>{this.state.tracks[1].track.name}</Button>
-		        <Button>{this.state.tracks[2].track.name}</Button>
-		        </div>
-		        <div className="App-buttons">
-		        </div>
+	        	<AlbumCover track = {this.state.currentTrack.track}/>
+	        	<Sound url={this.state.currentTrack.track.preview_url} playStatus={Sound.status.PLAYING}/>
+		        
+		        <p>Lets's play!</p>
+		        <p>Choose the song that you hear and that belongs to the album above: </p>
+		        
+		    </div>
+		    <div className="App-buttons">
+	            {
+	              shuffledTracks.map(track => (
+	                <Button onClick={() => this.checkAnswer(track)}>{track.track.name}</Button>
+	              ))
+	            }
+          	</div>
 	      	</div>
 	    );
-  	} 
+  	} // problems with Sublime
   	else{
   		return (
 	      <div className="App">
@@ -101,6 +119,19 @@ class App extends Component {
   	
   }
 
+  checkAnswer(track) {
+    if (track.track.id === this.state.currentTrack.track.id) {
+      	swal('Bravo !', 'Your win', 'success').then(
+      		function takeNewTrack() {
+      			window.location.reload(); // The next line should work too!
+      			//this.state.currentTrack = this.state.tracks[getRandomNumber(this.state.tracks.length)];
+ 			}
+      	);
+    } else {
+      	swal('Try again', 'Ths is not the right answer', 'error');
+    }
+  }
+
   componentDidMount() {
   	this.setState({text: "Bonjour"});
 
@@ -116,9 +147,13 @@ class App extends Component {
 	  	this.setState({
 	  		songsLoaded: true,
 	  		tracks: data.items,
+	  		currentTrack: data.items[getRandomNumber(data.items.length)], 
 	  		text: "On a bien reçu tout de Spotify ! =D -- Length: " + this.state.tracks.length
 	  	});
 	  })
+
+
+
   
   }
 }
