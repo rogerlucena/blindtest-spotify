@@ -1,3 +1,9 @@
+// Remote site to access: https://rogerlucena.github.io/blindtest-spotify/
+// Useful comands on the terminal:
+// npm install -> install the dependencies after cloning from git
+// npm start -> start localhost using Node Project Manager
+// P.S.: by the end the best was to install NodeJS using the Node Version Manager (NVM)
+
 /*global swal*/
 
 // token=    BQDGTe2XfR7teWizu1ZwpFv4JAjZ5bYYoV-XXKQZYN6zgW3o5FzL_Ah0UtgXBl_mMTOyngNvUhyeaGhiP64uaws3_yHN1UfSWiHUOM-q0t2EBpxDzLdnBK4bPe3WNAARrfbAlbmY1CIDYCf4MvtCXBEBaPruQqaqZcx_yq92Kc0
@@ -11,7 +17,7 @@ import Button from './Button';
 
 
 // You have to get a new token every 1 hour !!!
-const apiToken = 'BQCzhJ5EVAjHzQkPnE-ooYrnd2BPFV0ltebfD0L6vaUAvkYOYRIJYl7bDHe9e8wDe2H1mSGZ4csjOeNqGqi-F_B0s3M1-zEOQMDAQfYZ7AFcHMSi8Xw6OdnHJlGMcUxOCr4MOcr14xLW3lGOjQuhbtsA3F7xY-mlpABkpIA72AU';
+const apiToken = 'BQB8AN3xp2xGR6kFVMq5yAjImr0dgqZ4ARdW1SSoFi0U7de6t8uicv1l0sQJmfVwgqAItk7fmg4v3l96f3l6j7-0ROVcPuAFl-RQsUUkEZqVQY2-NVTuyvL_QZjwEHVPsDDOyumrZ1IP7z0qPm_mRKQi-axWjN_n_sOkKyL9BLg';
 
 function shuffleArray(array) {
   let counter = array.length;
@@ -59,8 +65,10 @@ class App extends Component {
   	if(this.state.songsLoaded){
   		console.log(this.state.tracks);
 
-  	  	const randomIndex1 = getRandomNumber(this.state.tracks.length);
-      	const randomIndex2 = getRandomNumber(this.state.tracks.length);
+  	  	var randomIndex1 = getRandomNumber(this.state.tracks.length);
+      	var randomIndex2 = getRandomNumber(this.state.tracks.length);
+
+      	while(randomIndex1 === randomIndex2) randomIndex2 = getRandomNumber(this.state.tracks.length);
 
 	    const track0 = this.state.currentTrack;
 	    const track1 = this.state.tracks[randomIndex1];
