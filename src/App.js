@@ -9,6 +9,8 @@ import './App.css';
 import Sound from 'react-sound';
 import Button from './Button';
 
+
+// You have to get a new token every 1 hour !!!
 const apiToken = 'BQC78EMhx0XyLxKtiy6zlY--TamMWlp_NRu-QqjCcBAsUK5d8t888Q4v6GXfqBPIBvscislVgRJVO0VdUDswHs7UMTxg23O98Ut_MwVtBR0dCMBZ7m51qkd1ebosgdSWymuHkrx3jBPxEyGx6pVUitH0OgGrHUp7LJS9a0DxfMg';
 
 function shuffleArray(array) {
@@ -32,7 +34,7 @@ function getRandomNumber(x) {
 
 class AlbumCover extends Component {
   render() {
-  	console.log(this.props.track);
+  	//console.log(this.props.track);
     //const src = "https://example.com/image.png"; // A changer ;)
     const src = this.props.track.album.images[0].url;
 	return (
@@ -65,10 +67,13 @@ class App extends Component {
 	        </header>
 	        <div className="App-images">
 	        	<AlbumCover track = {this.state.tracks[0].track}/>
+	        	<Sound url={this.state.tracks[0].track.preview_url} playStatus={Sound.status.PLAYING}/>
 		        <div>{this.state.text} </div>
-		        <div>{this.state.firstTrackName}</div>
+		        <div>{this.state.tracks[0].track.name}</div>
 		        <p>Here we go with the Web Dojo !</p>
-
+		        <Button>{this.state.tracks[0].track.name}</Button>
+		        <Button>{this.state.tracks[1].track.name}</Button>
+		        <Button>{this.state.tracks[2].track.name}</Button>
 		        </div>
 		        <div className="App-buttons">
 		        </div>
@@ -111,8 +116,7 @@ class App extends Component {
 	  	this.setState({
 	  		songsLoaded: true,
 	  		tracks: data.items,
-	  		text: "On a bien reçu tout de Spotify ! =D -- Length: " + this.state.tracks.length,
-	  		firstTrackName: "First song: " + data.items[0].track.name
+	  		text: "On a bien reçu tout de Spotify ! =D -- Length: " + this.state.tracks.length
 	  	});
 	  })
   
