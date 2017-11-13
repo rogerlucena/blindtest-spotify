@@ -9,7 +9,7 @@ import './App.css';
 import Sound from 'react-sound';
 import Button from './Button';
 
-const apiToken = 'BQDGTe2XfR7teWizu1ZwpFv4JAjZ5bYYoV-XXKQZYN6zgW3o5FzL_Ah0UtgXBl_mMTOyngNvUhyeaGhiP64uaws3_yHN1UfSWiHUOM-q0t2EBpxDzLdnBK4bPe3WNAARrfbAlbmY1CIDYCf4MvtCXBEBaPruQqaqZcx_yq92Kc0';
+const apiToken = 'BQC78EMhx0XyLxKtiy6zlY--TamMWlp_NRu-QqjCcBAsUK5d8t888Q4v6GXfqBPIBvscislVgRJVO0VdUDswHs7UMTxg23O98Ut_MwVtBR0dCMBZ7m51qkd1ebosgdSWymuHkrx3jBPxEyGx6pVUitH0OgGrHUp7LJS9a0DxfMg';
 
 function shuffleArray(array) {
   let counter = array.length;
@@ -32,8 +32,10 @@ function getRandomNumber(x) {
 
 class AlbumCover extends Component {
   render() {
-    const src = "https://example.com/image.png"; // A changer ;)
-    return (
+  	console.log(this.props.track);
+    //const src = "https://example.com/image.png"; // A changer ;)
+    const src = this.props.track.album.images[0].url;
+	return (
     	<img src={src} style={{ width: 400, height: 400 }} />
     );
   }
@@ -53,6 +55,7 @@ class App extends Component {
 
   render() {
   	if(this.state.songsLoaded){
+  		console.log(this.state.tracks);
 		// <!--To be printing the javascript variable1 you use {}-->
 	    return (
 	      <div className="App">
@@ -61,7 +64,7 @@ class App extends Component {
 	          <h1 className="App-title">Welcome to the Blindtest</h1>
 	        </header>
 	        <div className="App-images">
-	        	<AlbumCover/>
+	        	<AlbumCover track = {this.state.tracks[0].track}/>
 		        <div>{this.state.text} </div>
 		        <div>{this.state.firstTrackName}</div>
 		        <p>Here we go with the Web Dojo !</p>
@@ -105,11 +108,12 @@ class App extends Component {
 	  .then(response => response.json())
 	  .then((data) => {
 	    console.log("Reponse reçue ! Voilà ce que j'ai reçu : ", data); // F12 no browser para ver o console!
-	  	this.setState({songsLoaded: true});
-	  	this.setState({tracks: data.items});
-	  	this.setState({text: "On a bien reçu tout de Spotify ! =D -- Length: " + this.state.tracks.length});
-	  	this.setState({firstTrackName: "First song: " + data.items[0].track.name});
-
+	  	this.setState({
+	  		songsLoaded: true,
+	  		tracks: data.items,
+	  		text: "On a bien reçu tout de Spotify ! =D -- Length: " + this.state.tracks.length,
+	  		firstTrackName: "First song: " + data.items[0].track.name
+	  	});
 	  })
   
   }
