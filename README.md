@@ -29,3 +29,5 @@ Then, launch the command:
 ```bash
 npm run deploy
 ```
+
+(More comments and instructions at the beginning of the App.js file)
