@@ -1,4 +1,5 @@
 // Remote site to access: https://rogerlucena.github.io/blindtest-spotify/
+// Get Spotify API token: https://developer.spotify.com/web-api/console/get-current-user-saved-tracks/#complete
 // Useful comands on the terminal:
 // npm install -> install the dependencies after cloning from git
 // npm start -> start localhost using Node Project Manager
@@ -17,7 +18,7 @@ import Button from './Button';
 
 
 // You have to get a new token every 1 hour !!!
-const apiToken = 'BQB8AN3xp2xGR6kFVMq5yAjImr0dgqZ4ARdW1SSoFi0U7de6t8uicv1l0sQJmfVwgqAItk7fmg4v3l96f3l6j7-0ROVcPuAFl-RQsUUkEZqVQY2-NVTuyvL_QZjwEHVPsDDOyumrZ1IP7z0qPm_mRKQi-axWjN_n_sOkKyL9BLg';
+const apiToken = 'BQBH8mnLaRB-UgAoDxKB7sy3TNpTnt25gsnWRaU4i0QqvLKk0XsgWIRPrKim0fN0k09M03Jkx7v9WKrqtlb2r5zrU8wCUoDvVeQfChl3SCWxaig5ud_n0YZO_IgFCy_hopKe-R7D0q9L1HrEjB07EXiPCbvqjYytewIoz_yGtj0';
 
 function shuffleArray(array) {
   let counter = array.length;
@@ -57,7 +58,7 @@ class App extends Component {
     	text: "" ,
     	songsLoaded: false,
     	tracks: {},
-    	currentTrack: null
+    	currentTrack: null,
     }
   }
 
@@ -117,6 +118,7 @@ class App extends Component {
 
 	        {this.state.text} 
 	          <p>Loading!</p>
+	          <p>(If it is taking too long then you have to update the 1-hour valable Spotify API token)</p>
 
 	        </div>
 	        <div className="App-buttons">
@@ -141,7 +143,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-  	this.setState({text: "Bonjour"});
+  	this.setState({text: "Bonjour!"});
 
   	fetch('https://api.spotify.com/v1/me/tracks', {
 	  method: 'GET',
