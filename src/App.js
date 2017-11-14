@@ -3,6 +3,7 @@
 // Useful comands on the terminal:
 // npm install -> install the dependencies after cloning from git
 // npm start -> start localhost using Node Project Manager
+// npm run deploy -> para jogar no site remoto também
 // P.S.: by the end the best was to install NodeJS using the Node Version Manager (NVM)
 
 /*global swal*/
