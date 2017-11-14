@@ -30,4 +30,4 @@ Then, launch the command:
 npm run deploy
 ```
 
-(More comments and instructions at the beginning of the App.js file)
+(More comments and instructions at the beginning of the `App.js` file inside `src`)
