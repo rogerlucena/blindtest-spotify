@@ -70,6 +70,7 @@ class App extends Component {
   	  	var randomIndex1 = getRandomNumber(this.state.tracks.length);
       	var randomIndex2 = getRandomNumber(this.state.tracks.length);
 
+      	// Fix later the problem of randomIndex0 being equal to one of the other two randomIndexes as well
       	while(randomIndex1 === randomIndex2) randomIndex2 = getRandomNumber(this.state.tracks.length);
 
 	    const track0 = this.state.currentTrack;
