@@ -5,6 +5,8 @@
 // npm start -> start localhost using Node Project Manager
 // npm run deploy -> para jogar no site remoto também
 // P.S.: by the end the best was to install NodeJS using the Node Version Manager (NVM)
+// Trello link with instructions for this project: https://trello.com/b/RqyIhJIl/web-dojo-13-11
+// Theodo's link for the table at Trello: https://trello.com/b/UGoQPLbv/web-dojo-x-13-11
 
 /*global swal*/
 
@@ -19,7 +21,7 @@ import Button from './Button';
 
 
 // You have to get a new token every 1 hour !!!
-const apiToken = 'BQBH8mnLaRB-UgAoDxKB7sy3TNpTnt25gsnWRaU4i0QqvLKk0XsgWIRPrKim0fN0k09M03Jkx7v9WKrqtlb2r5zrU8wCUoDvVeQfChl3SCWxaig5ud_n0YZO_IgFCy_hopKe-R7D0q9L1HrEjB07EXiPCbvqjYytewIoz_yGtj0';
+const apiToken = 'BQC2pbQWi7ESzbPPrV6Gxc6Hwr_DDbjiPGXmK1lJmrKmLDDfQ87HN0rplb7TWKKKFz6e3lVivJTPwv4smIB3Q0oqZFd-AZ51SRQE_tkUpQ31nP_Jg3D2aJN_CgOFQIyehT8gRUuwIqGtRL_PBTP2yfsa2tKsGg-c9-IN0zhqiJ8';
 
 function shuffleArray(array) {
   let counter = array.length;
